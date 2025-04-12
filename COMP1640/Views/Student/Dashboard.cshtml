@@ -1,45 +1,55 @@
 ﻿@model COMP1640.ViewModels.TutorMessageViewModel
 
 @{
-    ViewData["Title"] = "Student Dashboard";
+    Layout = "_LayoutStudent";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="container mt-4">
+<div class="container">
     <div class="row">
-        <!-- Left Column: Tutor Information and Interactions -->
+        <!-- Left Column: Tutor Info and Interactions -->
         <div class="col-md-4">
-            <!-- Student's Tutor -->
-            <div class="card mb-3">
-                <div class="card-body d-flex align-items-center">
-                    <div>
-                        <h6 class="mb-0">@(Model?.TutorName ?? "No assigned tutor")</h6>
+            <!-- Tutor Info -->
+            <div class="card border-1 shadow-sm mb-4" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                <div class="card-body p-4 d-flex align-items-center position-relative" style="border-radius: 12px;">
+                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
+                         style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.2rem;">
+                        <span>@(Model?.TutorName?.Split(' ').Last().Substring(0, 2).ToUpper() ?? "NA")</span>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-bold" style="color: #34495e;">@(Model?.TutorName ?? "No Assigned Tutor")</h6>
                         <small class="text-muted">@(Model?.LastMessage ?? "No messages yet")</small>
                     </div>
+                    @if (Model?.TutorId != null)
+                    {
+                        <a target="_blank" href="@Url.Action("Index", "Chat", new { userId = Model.TutorId })" class="stretched-link"></a>
+                    }
                 </div>
-                @if (Model?.TutorId != null)
-                {
-                    <a href="@Url.Action("Index", "Chat", new { userId = Model.TutorId })" class="stretched-link"></a>
-                }
             </div>
 
-            <!-- Interaction List -->
-            <div class="card">
-                <div class="card-header">Interactions</div>
-                <div class="card-body">
+            <!-- Interactions -->
+            <div class="card border-1 shadow-sm" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                <div class="card-header py-3 px-4" style="background-color: #f8f9fa; border-bottom: 1px solid #e0e0e0; border-radius: 12px 12px 0 0;">
+                    <h5 class="mb-0 fw-semibold" style="color: #34495e;">Recent Interactions</h5>
+                </div>
+                <div class="card-body p-4" style="border-radius: 12px;">
                     <ul class="list-unstyled">
                         @if (Model?.Interactions?.Any() == true)
                         {
                             @foreach (var interaction in Model.Interactions)
                             {
-                                <li>
-                                    <strong>@interaction.TutorName</strong> @interaction.Type
-                                    <span class="text-muted float-end">@interaction.Timestamp.ToString("hh:mm tt")</span>
+                                <li class="d-flex justify-content-between align-items-center mb-3 p-2 rounded-3" style="background-color: #f8f9fa; transition: background-color 0.2s ease;">
+                                    <div>
+                                        <strong style="color: #34495e;">@interaction.TutorName</strong>
+                                        <span class="text-muted small">@interaction.Type</span>
+                                    </div>
+                                    <span class="text-muted small">@interaction.Timestamp.ToString("hh:mm tt")</span>
                                 </li>
                             }
                         }
                         else
                         {
-                            <li class="text-muted">No recent interactions</li>
+                            <li class="text-muted text-center py-3">No recent interactions</li>
                         }
                     </ul>
                 </div>
@@ -48,24 +58,34 @@
 
         <!-- Right Column: Upcoming Meetings -->
         <div class="col-md-8">
-            <h5>Upcoming Meetings</h5>
+            <h5 class="fw-semibold mb-4" style="color: #34495e;">Upcoming Meetings</h5>
 
             @if (Model?.Meetings?.Any() == true)
             {
                 @foreach (var meeting in Model.Meetings)
                 {
-                    <div class="card mb-3">
-                        <div class="card-body d-flex justify-content-between align-items-center">
+                    <div class="card border-1 shadow-sm mb-4" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                        <div class="card-body p-4 d-flex justify-content-between align-items-center" style="border-radius: 12px;">
                             <div>
-                                <h6 class="mb-0">@meeting.Name</h6>
+                                <h6 class="mb-1 fw-bold" style="color: #34495e;">@meeting.Name</h6>
                                 <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
                             </div>
-                            <div>
+                            <div class="d-flex gap-2">
                                 @if (!string.IsNullOrEmpty(meeting.RecordLink))
                                 {
-                                    <a href="@meeting.RecordLink" target="_blank" class="btn btn-secondary btn-sm">Recorded Video</a>
+                                    <a href="@meeting.RecordLink"
+                                       target="_blank"
+                                       class="btn btn-outline-primary btn-sm px-3 py-1"
+                                       style="border-radius: 8px;">
+                                        <i class="fas fa-video me-1"></i> Recorded Video
+                                    </a>
                                 }
-                                <a href="@meeting.MeetingLink" target="_blank" class="btn btn-primary btn-sm">Join</a>
+                                <a href="@meeting.MeetingLink"
+                                   target="_blank"
+                                   class="btn btn-primary btn-sm px-3 py-1"
+                                   style="border-radius: 8px;">
+                                    <i class="fas fa-sign-in-alt me-1"></i> Join
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -73,8 +93,46 @@
             }
             else
             {
-                <p class="text-muted">No upcoming meetings.</p>
+                <div class="text-center py-5">
+                    <p class="text-muted fs-5">No upcoming meetings scheduled.</p>
+                </div>
             }
         </div>
     </div>
 </div>
+
+<style>
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+    }
+
+    .card-body {
+        background-color: #ffffff;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    .btn-outline-primary {
+        border-color: #3498db;
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+    .list-unstyled li:hover {
+        background-color: #e9ecef; /* Subtle hover effect for interactions */
+    }
+</style>

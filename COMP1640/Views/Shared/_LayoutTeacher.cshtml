@@ -1,12 +1,71 @@
 ﻿@{
     Layout = "_Layout";
 }
-<div class="container">
-    <h1 class="text-success">Teacher Dashboard</h1>
-    <ul>
-        <li><a asp-controller="Teacher" asp-action="Dashboard">Dashboard</a></li>
-        <li><a asp-controller="Teacher" asp-action="Document">Documents</a></li>
-    </ul>
-    <hr>
+
+<!-- Teacher Navbar -->
+<nav class="teacher-navbar">
+    <div class="container">
+        <ul class="nav justify-content-start">
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Teacher" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
+                   asp-controller="Teacher" asp-action="Index">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Teacher" && ViewContext.RouteData.Values["Action"]?.ToString() == "Dashboard" ? "active" : "")"
+                   asp-controller="Teacher" asp-action="Dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Teacher" && ViewContext.RouteData.Values["Action"]?.ToString() == "Document" ? "active" : "")"
+                   asp-controller="Teacher" asp-action="Document">
+                    <i class="fas fa-file-alt"></i> Document
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="content">
     @RenderBody()
 </div>
+
+<style>
+    .teacher-navbar {
+        background-color: #f8f9fa; /* Light background consistent with other navbars */
+        border-bottom: 1px solid #e0e0e0;
+        padding: 0.5rem 0; /* Compact padding */
+    }
+
+        .teacher-navbar .nav-link {
+            color: #34495e;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+            .teacher-navbar .nav-link:hover {
+                background-color: #e9ecef;
+                color: #3498db;
+            }
+
+            .teacher-navbar .nav-link.active {
+                background-color: #3498db;
+                color: #ffffff;
+                border-radius: 6px;
+            }
+
+            .teacher-navbar .nav-link i {
+                margin-right: 8px;
+            }
+
+    .content {
+        padding-top: 2rem; /* Consistent content padding */
+        padding-bottom: 2rem;
+    }
+</style>

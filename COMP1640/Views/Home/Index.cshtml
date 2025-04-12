@@ -1,65 +1,68 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-<div class="container text-center mt-5">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <div class="container">
-                <h1 class="text-danger">Staff Dashboard</h1>
-                <ul>
-                    <li><a asp-controller="Staff" asp-action="Student">Manage Students</a></li>
-                    <li><a asp-controller="Staff" asp-action="Teacher">Manage Teachers</a></li>
-                </ul>
-                <hr>
-            </div>
-            <div class="container">
-                <h1 class="text-primary">Student Dashboard</h1>
-                <ul>
-                    <li><a asp-controller="Student" asp-action="Dashboard">Dashboard</a></li>
-                    <li><a asp-controller="Student" asp-action="Document">Documents</a></li>
-                </ul>
-                <hr>
-            </div>
-            <div class="container">
-                <h1 class="text-success">Teacher Dashboard</h1>
-                <ul>
-                    <li><a asp-controller="Teacher" asp-action="Dashboard">Dashboard</a></li>
-                    <li><a asp-controller="Teacher" asp-action="Document">Documents</a></li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <img src="https://img.freepik.com/premium-vector/education-supplies-concept-isolated-icon_25030-13387.jpg" class="img-fluid rounded shadow-sm" alt="Welcome Image">
-        </div>
-    </div>
+﻿<div class="container mt-4">
+    <!-- Hero Section -->
+    <section class="text-center py-5">
+        <h1 class="display-4 fw-bold" style="color: #2c3e50;">Welcome to COMP1640</h1>
+        <p class="lead text-muted mb-4">A unified platform for teachers, students, and staff to manage school activities efficiently.</p>
+        <a href="#features" class="btn btn-primary px-4 py-2">Explore Features</a>
+    </section>
 
-    <hr class="my-5">
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <h2 class="text-center fw-semibold mb-5" style="color: #34495e;">Key Features</h2>
+        <div class="row g-4">
+            <!-- Feature for Teachers -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chalkboard-teacher fa-3x mb-3" style="color: #3498db;"></i>
+                        <h5 class="card-title fw-semibold" style="color: #2c3e50;">For Teachers</h5>
+                        <p class="card-text text-muted">Chat with students, submit and review documents, comment on work, and assign meetings.</p>
+                        <a asp-controller="Teacher" asp-action="Dashboard" class="btn btn-outline-primary mt-3">Teacher Dashboard</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Feature for Students -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-graduate fa-3x mb-3" style="color: #3498db;"></i>
+                        <h5 class="card-title fw-semibold" style="color: #2c3e50;">For Students</h5>
+                        <p class="card-text text-muted">Chat with teachers, submit and review documents, comment, and join scheduled meetings.</p>
+                        <a asp-controller="Student" asp-action="Dashboard" class="btn btn-outline-primary mt-3">Student Portal</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Feature for Staff -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users-cog fa-3x mb-3" style="color: #3498db;"></i>
+                        <h5 class="card-title fw-semibold" style="color: #2c3e50;">For Staff</h5>
+                        <p class="card-text text-muted">Manage students and teachers, assign students to teachers, and teachers to students.</p>
+                        <a asp-controller="Staff" asp-action="Student" class="btn btn-outline-primary mt-3">Staff Tools</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="row mt-5">
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-primary">📚 Easy Learning</h5>
-                    <p class="card-text">Access a variety of educational resources to enhance your knowledge.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-success">👩‍🏫 Expert Teachers</h5>
-                    <p class="card-text">Learn from experienced teachers and mentors to boost your skills.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-danger">💬 Community Support</h5>
-                    <p class="card-text">Engage with students and staff to solve problems and share knowledge.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Call to Action Section -->
+    <section class="bg-light py-5 text-center rounded-3">
+        <h3 class="fw-semibold" style="color: #34495e;">Ready to Get Started?</h3>
+        <p class="text-muted mb-4">Join our platform and streamline your school experience today.</p>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary px-4 py-2 me-2">Sign Up</a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary px-4 py-2">Log In</a>
+        }
+        else
+        {
+            <a asp-controller="Home" asp-action="Dashboard" class="btn btn-primary px-4 py-2">Go to Dashboard</a>
+        }
+    </section>
+
+    <!-- Footer (Optional) -->
+    <footer class="text-center py-4 mt-5" style="color: #34495e;">
+        <p>© 2025 COMP1640 - School Management System. All rights reserved.</p>
+    </footer>
 </div>

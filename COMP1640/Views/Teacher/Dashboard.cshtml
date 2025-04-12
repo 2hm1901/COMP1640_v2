@@ -1,78 +1,169 @@
 ﻿@model COMP1640.ViewModels.TeacherDashboardViewModel
 
-<!-- Main Content -->
-<div class="row mt-4 px-4">
-    <!-- Students Section -->
-    <div class="col-md-4">
-        <div class="bg-white p-3 rounded shadow-sm">
-            <h5>Students</h5>
-            <hr>
+@{
+    Layout = "_LayoutTeacher";
+    ViewData["Title"] = "Dashboard";
+}
 
-            @if (Model.Students.Any())
+<div class="container">
+    <div class="row">
+        <!-- Students Section -->
+        <div class="col-md-4">
+            <div class="card border-1 shadow-sm" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                <div class="card-header py-3 px-4" style="background-color: #f8f9fa; border-bottom: 1px solid #e0e0e0; border-radius: 12px 12px 0 0;">
+                    <h5 class="mb-0 fw-semibold" style="color: #34495e;">Your Students</h5>
+                </div>
+                <div class="card-body p-4" style="border-radius: 12px;">
+                    @if (Model.Students.Any())
+                    {
+                        @foreach (var student in Model.Students)
+                        {
+                            <div class="student mb-3 p-3 rounded-3" style="background-color: #f8f9fa; transition: background-color 0.2s ease;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1">
+                                            <strong style="color: #34495e;">@student.StudentName</strong><br>
+                                            <small class="text-muted">@(student.LastMessage ?? "No recent messages")</small>
+                                        </p>
+                                    </div>
+                                    <a href="@Url.Action("Index", "Chat", new { userId = student.StudentId })"
+                                       class="btn btn-primary btn-sm px-3 py-1"
+                                       style="border-radius: 8px;">
+                                        <i class="fas fa-comment me-1"></i> Chat
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center py-3">No students assigned yet.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Meetings Section -->
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-semibold" style="color: #34495e;">Upcoming Meetings</h5>
+                <a href="@Url.Action("Create", "Teacher")"
+                   class="btn btn-primary px-4 py-2"
+                   style="border-radius: 8px;">
+                    <i class="fas fa-calendar-plus me-2"></i> Arrange Meeting
+                </a>
+            </div>
+
+            @if (Model.Meetings.Any())
             {
-                @foreach (var student in Model.Students)
+                @foreach (var meeting in Model.Meetings)
                 {
-                    <div class="student mb-3">
-                        <p>
-                            <strong>@student.StudentName</strong><br>
-                            @student.LastMessage
-                        </p>
-                        <a href="@Url.Action("Index", "Chat", new { userId = student.StudentId })" class="btn btn-sm btn-primary">Chat</a>
+                    <div class="card border-1 shadow-sm mb-4" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                        <div class="card-body p-4" style="border-radius: 12px;">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h6 class="mb-1 fw-bold" style="color: #34495e;">@meeting.Name</h6>
+                                    <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    @if (!string.IsNullOrEmpty(meeting.RecordLink))
+                                    {
+                                        <a href="@meeting.RecordLink"
+                                           target="_blank"
+                                           class="btn btn-outline-primary btn-sm px-3 py-1"
+                                           style="border-radius: 8px;">
+                                            <i class="fas fa-video me-1"></i> View Record
+                                        </a>
+                                    }
+                                    <a href="@meeting.MeetingLink"
+                                       target="_blank"
+                                       class="btn btn-primary btn-sm px-3 py-1"
+                                       style="border-radius: 8px;">
+                                        <i class="fas fa-sign-in-alt me-1"></i> Join
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-3">@meeting.StudentName</p>
+
+                            <!-- Update Record Link -->
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn btn-outline-primary btn-sm px-3 py-1"
+                                        onclick="toggleRecordingInput('@meeting.Id')"
+                                        style="border-radius: 8px;">
+                                    <i class="fas fa-edit me-1"></i> Update Record Link
+                                </button>
+                            </div>
+
+                            <!-- Hidden Input for Updating Record Link -->
+                            <div id="recordingInputContainer-@meeting.Id" class="mt-3 d-none">
+                                <div class="input-group w-75">
+                                    <input type="url"
+                                           id="recordingLinkInput-@meeting.Id"
+                                           class="form-control form-control-sm"
+                                           placeholder="Enter recording link"
+                                           value="@meeting.RecordLink"
+                                           style="border-radius: 8px 0 0 8px; border: 1px solid #e0e0e0;" />
+                                    <button class="btn btn-primary btn-sm"
+                                            onclick="saveRecordLink('@meeting.Id')"
+                                            style="border-radius: 0 8px 8px 0;">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <hr>
                 }
             }
             else
             {
-                <p class="text-muted">No students assigned yet.</p>
-            }
-        </div>
-    </div>
-
-    <!-- Upcoming Meetings Section -->
-    <div class="col-md-8">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5>Upcoming Meetings</h5>
-            <a href="@Url.Action("Create", "Teacher")" class="btn btn-secondary">Arrange Meeting</a>
-        </div>
-
-        @if (Model.Meetings.Any())
-        {
-            @foreach (var meeting in Model.Meetings)
-            {
-                <div class="bg-white p-3 rounded shadow-sm mb-3">
-                    <h6>@meeting.Name</h6>
-                    <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
-                    <hr>
-                    <p>@meeting.StudentName</p>
-
-                    <div class="d-flex justify-content-end gap-2">
-                        <!-- Update Button (Shows Input) -->
-                        <button class="btn btn-light" onclick="toggleRecordingInput('@meeting.Id')">Update Record Link</button>
-
-                        <!-- View Button (Navigates to Record Link) -->
-                        @if (!string.IsNullOrEmpty(meeting.RecordLink))
-                        {
-                            <a href="@meeting.RecordLink" target="_blank" class="btn btn-secondary">View Record</a>
-                        }
-                        <a href="@meeting.MeetingLink" target="_blank" class="btn btn-secondary">Join Meeting</a>
-                    </div>
-
-                    <!-- Hidden Input for Updating Record Link -->
-                    <div id="recordingInputContainer-@meeting.Id" class="mt-2 d-none">
-                        <input type="url" id="recordingLinkInput-@meeting.Id" class="form-control form-control-sm w-50"
-                               placeholder="Enter recording link" value="@meeting.RecordLink" />
-                        <button class="btn btn-primary btn-sm mt-1" onclick="saveRecordLink('@meeting.Id')">Save</button>
-                    </div>
+                <div class="text-center py-5">
+                    <p class="text-muted fs-5">No upcoming meetings scheduled.</p>
                 </div>
             }
-        }
-        else
-        {
-            <p class="text-muted">No upcoming meetings.</p>
-        }
+        </div>
     </div>
 </div>
+
+<style>
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+    }
+
+    .card-body {
+        background-color: #ffffff;
+    }
+
+    .student:hover {
+        background-color: #e9ecef; /* Subtle hover effect */
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    .btn-outline-primary {
+        border-color: #3498db;
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Blue focus ring */
+    }
+</style>
 
 <script>
     function toggleRecordingInput(meetingId) {
@@ -105,3 +196,4 @@
             })
             .catch(error => console.error("Error:", error));
     }
+</script>

@@ -1,9 +1,87 @@
 ﻿@{
     Layout = "_LayoutStudent";
+    ViewData["Title"] = "Student Home";
 }
 
-<h2>Welcome, Student!</h2>
-<p>Your dashboard shows conversations, notifications, and meetings.</p>
+<div class="student-home">
+    <h2 class="fw-semibold" style="color: #34495e;">Welcome, Student!</h2>
+    <p class="text-muted mb-5">Your hub for conversations, notifications, meetings, and document management.</p>
+
+    <!-- Getting Started Guide -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Getting Started</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">As a student, this platform is designed to help you stay connected with your teachers and manage your academic tasks efficiently. Here’s how to make the most of it:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3">
+                    <i class="fas fa-comment text-primary me-2"></i>
+                    <strong>Chat with Your Teacher:</strong> Use the Document section to start conversations, ask questions, or get feedback on your work.
+                </li>
+                <li class="mb-3">
+                    <i class="fas fa-bell text-primary me-2"></i>
+                    <strong>Stay Updated:</strong> Check the Dashboard regularly for notifications about assignments, meetings, or updates from your teacher.
+                </li>
+                <li>
+                    <i class="fas fa-calendar text-primary me-2"></i>
+                    <strong>Join Meetings:</strong> Look out for scheduled meetings in the Dashboard and join them to discuss your progress or group projects.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- How to Upload Documents -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">How to Upload Documents</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Submitting your work is easy! Follow these steps to upload documents:</p>
+            <ol class="mt-3">
+                <li class="mb-2">Navigate to the <strong>Document</strong> section from the menu above.</li>
+                <li class="mb-2">Click the “Upload Document” button to start the process.</li>
+                <li class="mb-2">Select your file (e.g., PDF, Word) and add a brief description if needed.</li>
+                <li>Hit “Submit” to send it to your teacher for review.</li>
+            </ol>
+            <p class="text-muted mt-3">You can also review feedback or comments from your teacher in the same section once they’ve responded.</p>
+            <a asp-controller="Student" asp-action="Document" class="btn btn-outline-primary mt-3 px-4 py-2" style="border-radius: 8px;">Go to Documents</a>
+        </div>
+    </section>
+
+    <!-- Tips for Effective Communication -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Tips for Effective Communication</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Building a good relationship with your teacher is key to your success. Here are some tips:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3">
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Be Clear:</strong> When chatting, clearly state your questions or concerns to get helpful responses.
+                </li>
+                <li class="mb-3">
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Check Regularly:</strong> Visit the Dashboard often to catch notifications or meeting invites early.
+                </li>
+                <li>
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Respect Time:</strong> Teachers may have many students, so keep your messages concise and polite.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- What’s Next -->
+    <section>
+        <h4 class="fw-semibold" style="color: #34495e;">What’s Next?</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Now that you’re familiar with the basics, explore the platform to:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3"><strong>Review Past Work:</strong> Head to the Document section to see your submitted files and teacher comments.</li>
+                <li class="mb-3"><strong>Prepare for Meetings:</strong> Check the Dashboard for upcoming sessions and come ready with questions or ideas.</li>
+                <li><strong>Stay Organized:</strong> Use this platform to keep all your school tasks in one place—no more lost emails or papers!</li>
+            </ul>
+            <p class="text-muted mt-3">If you need help, don’t hesitate to reach out to your teacher through the chat feature.</p>
+            <a asp-controller="Student" asp-action="Dashboard" class="btn btn-primary px-4 py-2 mt-3" style="border-radius: 8px;">Visit Dashboard</a>
+        </div>
+    </section>
+</div>
 
 <style>
     .student-home .card {

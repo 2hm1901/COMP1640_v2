@@ -1,18 +1,24 @@
-﻿@model List<COMP1640.ViewModels.StudentViewModel>
-<div class="container mt-5">
+﻿@{
+    Layout = "_LayoutStaff";
+}
+
+@model List<COMP1640.ViewModels.StudentViewModel>
+
+<div class="container">
     <!-- Search Bar -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
             <div class="row g-3 align-items-center">
                 <div class="col-md-6 col-lg-4">
                     <form asp-action="Student" method="get" id="searchForm">
                         <div class="input-group">
-                            <span class="input-group-text bg-white"><i class="fas fa-search"></i></span>
+                            <span class="input-group-text bg-light border-0"><i class="fas fa-search text-muted"></i></span>
                             <input type="text"
                                    name="searchQuery"
-                                   class="form-control border-start-0"
+                                   class="form-control border-start-0 rounded-end"
                                    placeholder="Search by name"
-                                   value="@ViewBag.SearchQuery">
+                                   value="@ViewBag.SearchQuery"
+                                   style="background-color: #f8f9fa;" />
                         </div>
                     </form>
                 </div>
@@ -22,7 +28,7 @@
                         <button type="submit"
                                 name="withoutTutor"
                                 value="@(ViewBag.WithoutTutor == true ? "false" : "true")"
-                                class="btn btn-outline-primary @(ViewBag.WithoutTutor == true ? "active" : "")">
+                                class="btn btn-outline-primary @(ViewBag.WithoutTutor == true ? "active" : "") px-3 py-2">
                             <i class="fas fa-user-times me-1"></i> Without Tutor
                         </button>
                     </form>
@@ -31,7 +37,7 @@
                         <button type="submit"
                                 name="noInteraction7d"
                                 value="@(ViewBag.NoInteraction7d == true ? "false" : "true")"
-                                class="btn btn-outline-primary @(ViewBag.NoInteraction7d == true ? "active" : "")">
+                                class="btn btn-outline-primary @(ViewBag.NoInteraction7d == true ? "active" : "") px-3 py-2">
                             <i class="fas fa-clock me-1"></i> No Interaction 7d
                         </button>
                     </form>
@@ -39,24 +45,25 @@
             </div>
         </div>
     </div>
+
     <!-- Student List -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-white py-3">
-            <h5 class="mb-0">List of @Model.Count Students</h5>
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white py-3 px-4" style="border-bottom: 1px solid #e0e0e0;">
+            <h5 class="mb-0 fw-semibold" style="color: #34495e;">List of @Model.Count Students</h5>
         </div>
         <div class="card-body p-0">
             @foreach (var student in Model)
             {
-                <div class="p-3 border-bottom">
+                <div class="p-4 border-bottom" style="transition: background-color 0.2s ease;">
                     <div class="row align-items-center">
                         <div class="col-12 col-md-8">
                             <div class="d-flex align-items-center">
                                 <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
-                                     style="width: 45px; height: 45px; flex-shrink: 0;">
+                                     style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.2rem;">
                                     <span>@student.FullName.Split(' ').Last().Substring(0, 2).ToUpper()</span>
                                 </div>
                                 <div class="w-100">
-                                    <h6 class="mb-1 fw-bold">@student.FullName</h6>
+                                    <h6 class="mb-1 fw-bold" style="color: #2c3e50;">@student.FullName</h6>
                                     <div class="text-muted small d-flex flex-wrap gap-3">
                                         <span><i class="fas fa-envelope me-1"></i> @student.Email</span>
                                         <span><i class="fas fa-graduation-cap me-1"></i> @student.TutorName</span>
@@ -67,23 +74,25 @@
                         </div>
                         <div class="col-12 col-md-4 mt-3 mt-md-0">
                             <div class="d-flex justify-content-md-end">
-                                <form asp-action="AssignTutor" method="post" class="w-100" style="max-width: 200px;">
+                                <form asp-action="AssignTutor" method="post" class="w-100" style="max-width: 220px;">
                                     <input type="hidden" name="studentId" value="@student.Id" />
                                     <div class="dropdown w-100">
-                                        <button class="btn btn-outline-primary dropdown-toggle w-100 text-start"
+                                        <button class="btn btn-outline-primary dropdown-toggle w-100 text-center px-3 py-2"
                                                 type="button"
                                                 data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                            @(string.IsNullOrEmpty(student.TutorName) || student.TutorName == "No Tutor" ? "Assign teacher" : student.TutorName)
+                                                aria-expanded="false"
+                                                style="border-radius: 8px;">
+                                            @(string.IsNullOrEmpty(student.TutorName) || student.TutorName == "No Tutor" ? "Assign Teacher" : student.TutorName)
                                         </button>
-                                        <ul class="dropdown-menu w-100">
+                                        <ul class="dropdown-menu w-100 text-center" style="border-radius: 8px; border: 1px solid #e0e0e0;">
                                             @foreach (var teacher in student.AvailableTeachers)
                                             {
                                                 <li>
                                                     <button type="submit"
                                                             name="tutorId"
                                                             value="@teacher.Id"
-                                                            class="dropdown-item">
+                                                            class="dropdown-item"
+                                                            style="color: #34495e;">
                                                         @teacher.FullName
                                                     </button>
                                                 </li>
@@ -99,3 +108,56 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Card Styling */
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px; /* Softer corners */
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+        }
+
+    /* Search Bar */
+    .input-group-text {
+        border-radius: 8px 0 0 8px; /* Rounded left side */
+    }
+
+    .form-control {
+        border-radius: 0 8px 8px 0; /* Rounded right side */
+        box-shadow: none; /* Remove default shadow */
+    }
+
+    .btn-outline-primary {
+        border-radius: 8px; /* Consistent button radius */
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+        .btn-outline-primary.active {
+            background-color: #2980b9; /* Darker shade for active state */
+            color: #ffffff;
+            border-color: #2980b9;
+        }
+
+    /* Student List */
+    .border-bottom:hover {
+        background-color: #f8f9fa; /* Subtle hover effect */
+    }
+
+    .dropdown-menu {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for dropdown */
+    }
+
+    .dropdown-item:hover {
+        background-color: #e9ecef; /* Hover effect for dropdown items */
+        color: #3498db;
+    }
+</style>

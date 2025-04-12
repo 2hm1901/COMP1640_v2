@@ -1,55 +1,96 @@
 ﻿@model COMP1640.Models.Meeting
-@{
 
+@{
+    Layout = "_LayoutTeacher";
     ViewData["Title"] = "Create Meeting";
     var students = ViewBag.Students as List<COMP1640.Models.ApplicationUser>;
 }
 
-<div class="container mt-4">
-    <h4>Create New Meeting</h4>
-    <form asp-action="Create" method="post">
-        <div class="mb-3">
-            <label class="form-label">Meeting Name</label>
-            <input asp-for="Name" class="form-control" required />
+<div class="container">
+    <div class="card border-0 shadow-sm rounded-3" style="width: 100%; margin: 0 auto;">
+        <div class="card-header py-3 px-4" style="background-color: #3498db; color: #ffffff; border-radius: 12px 12px 0 0;">
+            <h4 class="fw-semibold mb-0"><i class="fas fa-calendar-plus me-2"></i> Create New Meeting</h4>
         </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post">
+                <div class="mb-4">
+                    <label class="form-label fw-semibold" style="color: #34495e;">Meeting Name</label>
+                    <input asp-for="Name"
+                           class="form-control"
+                           required
+                           placeholder="Enter meeting title"
+                           style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;" />
+                </div>
 
-        <div class="mb-3">
-            <label class="form-label">Select Student</label>
-            <select asp-for="StudentId" class="form-select" required>
-                <option value="">Select a student</option>
-                @foreach (var student in students)
-                {
-                    <option value="@student.Id">@student.FullName</option>
-                }
-            </select>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold" style="color: #34495e;">Select Student</label>
+                    @if (students != null && students.Any())
+                    {
+                        <select asp-for="StudentId"
+                                class="form-select"
+                                required
+                                style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;">
+                            <option value="">-- Select a student --</option>
+                            @foreach (var student in students)
+                            {
+                                <option value="@student.Id">@student.FullName</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" style="border-radius: 8px;">
+                            <i class="fas fa-exclamation-triangle me-2"></i> No students available to assign.
+                        </div>
+                    }
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold" style="color: #34495e;">Deadline</label>
+                    <input asp-for="Deadline"
+                           type="datetime-local"
+                           class="form-control"
+                           required
+                           min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                           style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;" />
+                    <small class="text-muted mt-1 d-block">Select a date and time for the meeting.</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold" style="color: #34495e;">Meeting Link</label>
+                    <div class="input-group">
+                        <input asp-for="MeetingLink"
+                               id="meetingLinkInput"
+                               class="form-control"
+                               placeholder="Paste Google Meet link here"
+                               required
+                               style="border-radius: 8px 0 0 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;" />
+                        <button type="button"
+                                class="btn btn-outline-primary"
+                                id="generateLinkBtn"
+                                style="border-radius: 0 8px 8px 0;">
+                            <i class="fas fa-link me-1"></i> Generate
+                        </button>
+                    </div>
+                    <small class="text-muted mt-1 d-block">Click "Generate" to create a new Google Meet link.</small>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="@Url.Action("Dashboard", "Teacher")"
+                       class="btn btn-outline-primary px-4 py-2"
+                       style="border-radius: 8px;">
+                        <i class="fas fa-times me-1"></i> Cancel
+                    </a>
+                    <button type="submit"
+                            class="btn btn-primary px-4 py-2"
+                            style="border-radius: 8px;">
+                        <i class="fas fa-check me-1"></i> Create Meeting
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Deadline</label>
-            <input asp-for="Deadline" type="datetime-local" class="form-control" required
-                   min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Meeting Link</label>
-            <div class="input-group">
-                <input asp-for="MeetingLink" id="meetingLinkInput" class="form-control" placeholder="Paste Google Meet link here" required />
-                <button type="button" class="btn btn-secondary" id="generateLinkBtn">Generate</button>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Create Meeting</button>
-    </form>
+    </div>
 </div>
-
-<script>
-    document.getElementById("generateLinkBtn").addEventListener("click", function () {
-        const meetUrl = "https://meet.google.com/new";
-
-        // Open Google Meet in a new tab
-        const newTab = window.open(meetUrl, "_blank");
-    });
-</script>
 
 <style>
     .card {
@@ -57,18 +98,18 @@
         transition: box-shadow 0.3s ease;
     }
 
-    .card:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
-    }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+        }
 
     .form-control, .form-select {
         box-shadow: none; /* Remove default shadow */
     }
 
-    .form-control:focus, .form-select:focus {
-        border-color: #3498db;
-        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Blue focus ring */
-    }
+        .form-control:focus, .form-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Blue focus ring */
+        }
 
     .btn-primary {
         background-color: #3498db;
@@ -76,10 +117,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-primary:hover {
-        background-color: #2980b9;
-        border-color: #2980b9;
-    }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
 
     .btn-outline-primary {
         border-color: #3498db;
@@ -87,10 +128,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-outline-primary:hover {
-        background-color: #3498db;
-        color: #ffffff;
-    }
+        .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
 
     .alert-warning {
         background-color: #fff3cd;

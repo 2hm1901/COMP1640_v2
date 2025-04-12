@@ -1,5 +1,158 @@
 ﻿@{
     Layout = "_LayoutStaff";
 }
-<h2>Welcome, Staff!</h2>
-<p>Manage students and teachers here.</p>
+
+<!-- Staff Index Content -->
+<div class="staff-index">
+    <h2 class="fw-semibold" style="color: #34495e;">Welcome, Staff!</h2>
+    <p class="text-muted mb-4">Manage students and teachers here with ease and efficiency.</p>
+
+    <!-- Quick Stats -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold" style="color: #2c3e50;">Total Students</h5>
+                    <p class="display-6" style="color: #3498db;">150</p> <!-- Placeholder value -->
+                    <a asp-controller="Staff" asp-action="StudentManagement" class="btn btn-outline-primary">View Students</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold" style="color: #2c3e50;">Total Teachers</h5>
+                    <p class="display-6" style="color: #3498db;">25</p> <!-- Placeholder value -->
+                    <a asp-controller="Staff" asp-action="TeacherManagement" class="btn btn-outline-primary">View Teachers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold" style="color: #2c3e50;">Pending Assignments</h5>
+                    <p class="display-6" style="color: #3498db;">8</p> <!-- Placeholder value -->
+                    <a asp-controller="Staff" asp-action="PendingAssignments" class="btn btn-outline-primary">Review Assignments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Quick Actions</h4>
+        <div class="d-flex flex-wrap gap-3 mt-3">
+            <a asp-controller="Staff" asp-action="AssignStudentToTeacher" class="btn btn-primary px-4 py-2">Assign Student to Teacher</a>
+            <a asp-controller="Staff" asp-action="AssignTeacherToStudent" class="btn btn-outline-primary px-4 py-2">Assign Teacher to Student</a>
+            <a asp-controller="Staff" asp-action="ManageRecords" class="btn btn-outline-primary px-4 py-2">Manage Records</a>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-activity mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Recent Activity</h4>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Assigned student "John Doe" to teacher "Ms. Smith"</span>
+                        <span class="text-muted small">Today, 10:30 AM</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Updated teacher "Mr. Johnson" profile</span>
+                        <span class="text-muted small">Yesterday, 3:15 PM</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Added 5 new students to the system</span>
+                        <span class="text-muted small">March 24, 2025, 9:00 AM</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Reviewed pending assignment for Class 10A</span>
+                        <span class="text-muted small">March 23, 2025, 2:45 PM</span>
+                    </li>
+                </ul>
+                <a asp-controller="Staff" asp-action="ActivityLog" class="btn btn-outline-primary mt-3">View Full Activity Log</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Overview -->
+    <div class="staff-overview mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Staff Overview</h4>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold" style="color: #2c3e50;">Student Distribution</h5>
+                        <p class="text-muted">Overview of students assigned to teachers:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Ms. Smith:</strong> 30 students</li>
+                            <li><strong>Mr. Johnson:</strong> 25 students</li>
+                            <li><strong>Ms. Lee:</strong> 28 students</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold" style="color: #2c3e50;">Teacher Workload</h5>
+                        <p class="text-muted">Current teacher assignments:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Ms. Smith:</strong> 2 classes, 5 pending reviews</li>
+                            <li><strong>Mr. Johnson:</strong> 3 classes, 3 pending reviews</li>
+                            <li><strong>Ms. Lee:</strong> 1 class, 8 pending reviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="notifications">
+        <h4 class="fw-semibold" style="color: #34495e;">Notifications</h4>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>New student registration pending approval</span>
+                        <a href="#" class="btn btn-sm btn-primary">Review</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Teacher "Mr. Johnson" requested profile update</span>
+                        <a href="#" class="btn btn-sm btn-primary">Review</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>System maintenance scheduled for March 28, 2025</span>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Details</a>
+                    </li>
+                </ul>
+                <a asp-controller="Staff" asp-action="Notifications" class="btn btn-outline-primary mt-3">View All Notifications</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .staff-index .card {
+        transition: transform 0.2s ease;
+    }
+
+        .staff-index .card:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+        }
+
+    .staff-index .display-6 {
+        font-size: 2.5rem; /* Adjusted for prominence */
+    }
+
+    .staff-index .list-group-item {
+        border: none; /* Clean look for lists */
+        padding: 1rem 0;
+    }
+
+    .staff-index .btn-sm {
+        padding: 0.25rem 0.75rem; /* Smaller buttons for notifications */
+    }
+</style>
