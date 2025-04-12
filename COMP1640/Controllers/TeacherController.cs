@@ -395,6 +395,8 @@ public class TeacherController : Controller
 
 
             return RedirectToAction("Document");
+
+            //hi this is a test
         }
 
         return Unauthorized();
