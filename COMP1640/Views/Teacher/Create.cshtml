@@ -26,22 +26,22 @@
                     <label class="form-label fw-semibold" style="color: #34495e;">Select Student</label>
                     @if (students != null && students.Any())
                     {
-                        <select asp-for="StudentId"
-                                class="form-select"
-                                required
-                                style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;">
-                            <option value="">-- Select a student --</option>
-                            @foreach (var student in students)
+                    <select asp-for="StudentId"
+                            class="form-select"
+                            required
+                            style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;">
+                        <option value="">-- Select a student --</option>
+                        @foreach (var student in students)
                             {
-                                <option value="@student.Id">@student.FullName</option>
+                        <option value="@student.Id">@student.FullName</option>
                             }
-                        </select>
+                    </select>
                     }
                     else
                     {
-                        <div class="alert alert-warning" style="border-radius: 8px;">
-                            <i class="fas fa-exclamation-triangle me-2"></i> No students available to assign.
-                        </div>
+                    <div class="alert alert-warning" style="border-radius: 8px;">
+                        <i class="fas fa-exclamation-triangle me-2"></i> No students available to assign.
+                    </div>
                     }
                 </div>
 

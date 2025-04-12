@@ -1,27 +1,125 @@
 ﻿@using System.Security.Claims
 @model List<COMP1640.Models.Message>
 
-@{
+    @{
     var receiverId = "@ViewBag.ReceiverId";
-}
-<div class="chat-container">
-    <div class="message-history">
-        @foreach (var message in Model)
-        {
-            <div class="message @(message.SenderId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value ? "sent" : "received")">
-                <p>@message.Content</p>
-                <small>@message.Timestamp.ToString("g")</small>
+    ViewData["Title"] = "Chat";
+    }
+
+    <div class="chat-container container mb-5" style="width: 100% !important; max-width: none">
+        <div class="card border-0 shadow-sm rounded-3" style="width: 100%; margin: 0 auto;">
+            <div class="card-header py-3 px-4" style="background-color: #3498db; color: #ffffff; border-radius: 12px 12px 0 0;">
+                <h5 class="mb-0 fw-semibold"><i class="fas fa-comments me-2"></i> Chat with Tutor</h5>
             </div>
+            <div class="card-body p-0">
+                <!-- Message History -->
+                <div class="message-history p-4" style="height: 500px; overflow-y: auto; background-color: #f8f9fa;">
+                    @foreach (var message in Model)
+                {
+                    <div class="message @(message.SenderId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value ? "sent" : "received") mb-2">
+                        <div class="message-bubble">
+                            <p class="mb-1">@message.Content</p>
+                            <small class="text-muted">@message.Timestamp.ToString("g")</small>
+                        </div>
+                    </div>
+                }
+                </div>
+
+                <!-- Message Input -->
+                <div class="message-input p-4 border-top" style="border-color: #e0e0e0;">
+                    <div class="d-flex align-items-center gap-2" style="width: 100%;">
+                        <input type="text"
+                               id="messageInput"
+                               class="form-control"
+                               placeholder="Type your message..."
+                               style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #ffffff;" />
+                        <button id="sendButton"
+                                class="btn btn-primary px-4 py-2"
+                                style="border-radius: 8px;">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .chat-container .card {
+            transition: box-shadow 0.3s ease;
         }
-    </div>
-    <div class="message-input">
-        <input type="text" id="messageInput" />
-        <button id="sendButton">Send</button>
-    </div>
-</div>
-@section Scripts {
-    <script src="~/lib/microsoft-signalr/signalr.min.js"></script>
-    <script>
+
+            .chat-container .card:hover {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+            }
+
+        .message-history {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            display: flex;
+            max-width: 70%; /* Limit message width */
+        }
+
+            .message.sent {
+                justify-content: flex-end;
+                margin-left: auto;
+            }
+
+            .message.received {
+                justify-content: flex-start;
+                margin-right: auto;
+            }
+
+        .message-bubble {
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.sent .message-bubble {
+            background-color: #3498db; /* Blue for sent messages */
+            color: #ffffff;
+        }
+
+        .message.received .message-bubble {
+            background-color: #e9ecef; /* Light gray for received messages */
+            color: #34495e;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .message small {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Blue focus ring */
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #2980b9;
+                border-color: #2980b9;
+            }
+    </style>
+
+    @section Scripts {
+        <script src="~/lib/microsoft-signalr/signalr.min.js"></script>
+        <script>
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/chatHub")
             .build();
@@ -31,39 +129,47 @@
         }).catch(err => console.error(err));
 
         document.getElementById("sendButton").addEventListener("click", function () {
-            const message = document.getElementById("messageInput").value;
-            const receiverId = "@ViewBag.ReceiverId";
-        connection.invoke("SendMessage", receiverId, message)
-            .catch(err => console.error(err));
-        document.getElementById("messageInput").value = "";
+            const message = document.getElementById("messageInput").value.trim();
+            if (message) { // Only send if message is not empty
+                const receiverId = "@ViewBag.ReceiverId";
+                connection.invoke("SendMessage", receiverId, message)
+                    .catch(err => console.error(err));
+                document.getElementById("messageInput").value = "";
+            }
         });
 
         connection.on("ReceiveMessage", (senderId, receiverId, message) => {
             const currentUserId = "@User.FindFirst(ClaimTypes.NameIdentifier)?.Value";
             const currentReceiverId = "@ViewBag.ReceiverId";
-         console.log("currentUserId", currentUserId);
-        console.log("currentReceiverId", currentReceiverId);
-        console.log("senderId", senderId);
-        console.log("receiverId", receiverId);
-    // Convert all IDs to strings for consistent comparison
-               const senderIdStr = senderId.toString();
-               const receiverIdStr = receiverId.toString();
-               const currentUserIdStr = currentUserId.toString();
-               const currentReceiverIdStr = currentReceiverId.toString();
 
-               // Only display the message if it belongs to the current chat
-               if ((senderIdStr === currentUserIdStr && receiverIdStr === currentReceiverIdStr) ||
-                   (senderIdStr === currentReceiverIdStr && receiverIdStr === currentUserIdStr)) {
-                        console.log("Message belongs to the current chat");
+            // Convert all IDs to strings for consistent comparison
+            const senderIdStr = senderId.toString();
+            const receiverIdStr = receiverId.toString();
+            const currentUserIdStr = currentUserId.toString();
+            const currentReceiverIdStr = currentReceiverId.toString();
+
+            // Only display the message if it belongs to the current chat
+            if ((senderIdStr === currentUserIdStr && receiverIdStr === currentReceiverIdStr) ||
+                (senderIdStr === currentReceiverIdStr && receiverIdStr === currentUserIdStr)) {
                 const isSender = senderIdStr === currentUserIdStr;
                 const messageHtml = `
-                 <div class="message ${isSender ? 'sent' : 'received'}">
-                        <p>${message}</p>
-                        <small>${new Date().toLocaleString()}</small>
-                    </div>`;
-                document.querySelector(".message-history").innerHTML += messageHtml;
-            } else {
-                console.log("Message does not belong to the current chat");
-                     }
-            });
-    </script>
+                            <div class="message ${isSender ? 'sent' : 'received'} mb-3">
+                                <div class="message-bubble">
+                                    <p class="mb-1">${message}</p>
+                                    <small class="text-muted">${new Date().toLocaleString()}</small>
+                                </div>
+                            </div>`;
+                const messageHistory = document.querySelector(".message-history");
+                messageHistory.innerHTML += messageHtml;
+                messageHistory.scrollTop = messageHistory.scrollHeight; // Auto-scroll to bottom
+            }
+        });
+
+        // Enable sending message with Enter key
+        document.getElementById("messageInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                document.getElementById("sendButton").click();
+            }
+        });
+        </script>
+    }

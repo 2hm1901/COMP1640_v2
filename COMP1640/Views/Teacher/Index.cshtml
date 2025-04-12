@@ -1,0 +1,125 @@
+@{
+    Layout = "_LayoutTeacher";
+    ViewData["Title"] = "Teacher Home";
+}
+
+<div class="teacher-home">
+    <h2 class="fw-semibold" style="color: #34495e;">Welcome, Teacher!</h2>
+    <p class="text-muted mb-5">Your hub for managing conversations and upcoming meetings with students.</p>
+
+    <!-- Getting Started Guide -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Getting Started</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">This platform is designed to help you stay connected with your students and manage your teaching tasks efficiently. Here’s how to begin:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3">
+                    <i class="fas fa-comment text-primary me-2"></i>
+                    <strong>Engage with Students:</strong> Use the Document section to review student submissions and start conversations.
+                </li>
+                <li class="mb-3">
+                    <i class="fas fa-calendar text-primary me-2"></i>
+                    <strong>Schedule Meetings:</strong> Check the Dashboard for upcoming meetings and plan sessions with your students.
+                </li>
+                <li>
+                    <i class="fas fa-users text-primary me-2"></i>
+                    <strong>Monitor Progress:</strong> Keep track of student interactions and submissions through this centralized hub.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Managing Student Documents -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Managing Student Documents</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Reviewing and providing feedback on student work is simple. Here’s how:</p>
+            <ol class="mt-3">
+                <li class="mb-2">Go to the <strong>Document</strong> section from the menu above.</li>
+                <li class="mb-2">Find the student’s uploaded file in the list.</li>
+                <li class="mb-2">Open the document to review it and add comments directly below.</li>
+                <li>Save your feedback to notify the student instantly.</li>
+            </ol>
+            <p class="text-muted mt-3">This keeps all communication in one place, making it easy to track progress over time.</p>
+            <a asp-controller="Teacher" asp-action="Document" class="btn btn-outline-primary mt-3 px-4 py-2" style="border-radius: 8px;">Go to Documents</a>
+        </div>
+    </section>
+
+    <!-- Tips for Effective Meetings -->
+    <section class="mb-5">
+        <h4 class="fw-semibold" style="color: #34495e;">Tips for Effective Meetings</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Meetings are a great way to connect with students. Here are some tips to make them productive:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3">
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Set an Agenda:</strong> Share topics in advance via chat to keep the meeting focused.
+                </li>
+                <li class="mb-3">
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Be Punctual:</strong> Start and end on time to respect everyone’s schedule.
+                </li>
+                <li>
+                    <i class="fas fa-check-circle text-primary me-2"></i>
+                    <strong>Follow Up:</strong> Use the Document section to send notes or assignments after the meeting.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- What’s Next -->
+    <section>
+        <h4 class="fw-semibold" style="color: #34495e;">What’s Next?</h4>
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+            <p class="text-muted">Now that you’re set up, explore the platform to:</p>
+            <ul class="list-unstyled mt-3">
+                <li class="mb-3"><strong>Check Conversations:</strong> Visit the Dashboard to see recent messages from students.</li>
+                <li class="mb-3"><strong>Plan Ahead:</strong> Review upcoming meetings and prepare discussion points.</li>
+                <li><strong>Stay Organized:</strong> Use this platform to keep all student interactions and files in one place.</li>
+            </ul>
+            <p class="text-muted mt-3">If you need assistance, feel free to reach out to the support team or check the help resources.</p>
+            <a asp-controller="Teacher" asp-action="Dashboard" class="btn btn-primary px-4 py-2 mt-3" style="border-radius: 8px;">Visit Dashboard</a>
+        </div>
+    </section>
+</div>
+
+<style>
+    .teacher-home .card {
+        background-color: #ffffff;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .teacher-home .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Hover shadow */
+        }
+
+    .teacher-home ul li, .teacher-home ol li {
+        color: #34495e;
+    }
+
+    .teacher-home .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .teacher-home .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    .teacher-home .btn-outline-primary {
+        border-color: #3498db;
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .teacher-home .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+    .teacher-home i {
+        color: #3498db; /* Icon color */
+    }
+</style>

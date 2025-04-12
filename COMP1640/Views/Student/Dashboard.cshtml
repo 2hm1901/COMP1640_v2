@@ -22,7 +22,7 @@
                     </div>
                     @if (Model?.TutorId != null)
                     {
-                        <a target="_blank" href="@Url.Action("Index", "Chat", new { userId = Model.TutorId })" class="stretched-link"></a>
+                    <a target="_blank" href="@Url.Action("Index", "Chat", new { userId = Model.TutorId })" class="stretched-link"></a>
                     }
                 </div>
             </div>
@@ -36,20 +36,20 @@
                     <ul class="list-unstyled">
                         @if (Model?.Interactions?.Any() == true)
                         {
-                            @foreach (var interaction in Model.Interactions)
+                        @foreach (var interaction in Model.Interactions)
                             {
-                                <li class="d-flex justify-content-between align-items-center mb-3 p-2 rounded-3" style="background-color: #f8f9fa; transition: background-color 0.2s ease;">
-                                    <div>
-                                        <strong style="color: #34495e;">@interaction.TutorName</strong>
-                                        <span class="text-muted small">@interaction.Type</span>
-                                    </div>
-                                    <span class="text-muted small">@interaction.Timestamp.ToString("hh:mm tt")</span>
-                                </li>
+                        <li class="d-flex justify-content-between align-items-center mb-3 p-2 rounded-3" style="background-color: #f8f9fa; transition: background-color 0.2s ease;">
+                            <div>
+                                <strong style="color: #34495e;">@interaction.TutorName</strong>
+                                <span class="text-muted small">@interaction.Type</span>
+                            </div>
+                            <span class="text-muted small">@interaction.Timestamp.ToString("hh:mm tt")</span>
+                        </li>
                             }
                         }
                         else
                         {
-                            <li class="text-muted text-center py-3">No recent interactions</li>
+                        <li class="text-muted text-center py-3">No recent interactions</li>
                         }
                     </ul>
                 </div>
@@ -62,40 +62,40 @@
 
             @if (Model?.Meetings?.Any() == true)
             {
-                @foreach (var meeting in Model.Meetings)
+            @foreach (var meeting in Model.Meetings)
                 {
-                    <div class="card border-1 shadow-sm mb-4" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
-                        <div class="card-body p-4 d-flex justify-content-between align-items-center" style="border-radius: 12px;">
-                            <div>
-                                <h6 class="mb-1 fw-bold" style="color: #34495e;">@meeting.Name</h6>
-                                <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
-                            </div>
-                            <div class="d-flex gap-2">
-                                @if (!string.IsNullOrEmpty(meeting.RecordLink))
-                                {
-                                    <a href="@meeting.RecordLink"
-                                       target="_blank"
-                                       class="btn btn-outline-primary btn-sm px-3 py-1"
-                                       style="border-radius: 8px;">
-                                        <i class="fas fa-video me-1"></i> Recorded Video
-                                    </a>
-                                }
-                                <a href="@meeting.MeetingLink"
-                                   target="_blank"
-                                   class="btn btn-primary btn-sm px-3 py-1"
-                                   style="border-radius: 8px;">
-                                    <i class="fas fa-sign-in-alt me-1"></i> Join
-                                </a>
-                            </div>
-                        </div>
+            <div class="card border-1 shadow-sm mb-4" style="border-radius: 12px; transition: box-shadow 0.3s ease;">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center" style="border-radius: 12px;">
+                    <div>
+                        <h6 class="mb-1 fw-bold" style="color: #34495e;">@meeting.Name</h6>
+                        <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
                     </div>
+                    <div class="d-flex gap-2">
+                        @if (!string.IsNullOrEmpty(meeting.RecordLink))
+                                {
+                        <a href="@meeting.RecordLink"
+                           target="_blank"
+                           class="btn btn-outline-primary btn-sm px-3 py-1"
+                           style="border-radius: 8px;">
+                            <i class="fas fa-video me-1"></i> Recorded Video
+                        </a>
+                                }
+                        <a href="@meeting.MeetingLink"
+                           target="_blank"
+                           class="btn btn-primary btn-sm px-3 py-1"
+                           style="border-radius: 8px;">
+                            <i class="fas fa-sign-in-alt me-1"></i> Join
+                        </a>
+                    </div>
+                </div>
+            </div>
                 }
             }
             else
             {
-                <div class="text-center py-5">
-                    <p class="text-muted fs-5">No upcoming meetings scheduled.</p>
-                </div>
+            <div class="text-center py-5">
+                <p class="text-muted fs-5">No upcoming meetings scheduled.</p>
+            </div>
             }
         </div>
     </div>

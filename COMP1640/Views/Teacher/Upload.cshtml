@@ -24,25 +24,25 @@
 
                 @if (Model.Students != null && Model.Students.Any())
                 {
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold" style="color: #34495e;">Select Student</label>
-                        <select name="studentId"
-                                class="form-select"
-                                required
-                                style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;">
-                            <option value="">-- Select Student --</option>
-                            @foreach (var student in Model.Students)
+                <div class="mb-4">
+                    <label class="form-label fw-semibold" style="color: #34495e;">Select Student</label>
+                    <select name="studentId"
+                            class="form-select"
+                            required
+                            style="border-radius: 8px; border: 1px solid #e0e0e0; background-color: #f8f9fa;">
+                        <option value="">-- Select Student --</option>
+                        @foreach (var student in Model.Students)
                             {
-                                <option value="@student.Id">@student.FullName (@student.Email)</option>
+                        <option value="@student.Id">@student.FullName (@student.Email)</option>
                             }
-                        </select>
-                    </div>
+                    </select>
+                </div>
                 }
                 else
                 {
-                    <div class="alert alert-warning mb-4" style="border-radius: 8px;">
-                        <i class="fas fa-exclamation-triangle me-2"></i> No students assigned to you.
-                    </div>
+                <div class="alert alert-warning mb-4" style="border-radius: 8px;">
+                    <i class="fas fa-exclamation-triangle me-2"></i> No students assigned to you.
+                </div>
                 }
 
                 <div class="mb-4">
@@ -63,7 +63,7 @@
                     </a>
                     <button type="submit"
                             class="btn btn-primary px-4 py-2"
-                    @(Model.Students == null || !Model.Students.Any() ? "disabled" : "")
+                            @(Model.Students == null || !Model.Students.Any() ? "disabled" : "")
                             style="border-radius: 8px;">
                         <i class="fas fa-upload me-1"></i> Upload
                     </button>
