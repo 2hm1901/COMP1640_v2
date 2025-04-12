@@ -1,0 +1,107 @@
+﻿@model COMP1640.ViewModels.TeacherDashboardViewModel
+
+<!-- Main Content -->
+<div class="row mt-4 px-4">
+    <!-- Students Section -->
+    <div class="col-md-4">
+        <div class="bg-white p-3 rounded shadow-sm">
+            <h5>Students</h5>
+            <hr>
+
+            @if (Model.Students.Any())
+            {
+                @foreach (var student in Model.Students)
+                {
+                    <div class="student mb-3">
+                        <p>
+                            <strong>@student.StudentName</strong><br>
+                            @student.LastMessage
+                        </p>
+                        <a href="@Url.Action("Index", "Chat", new { userId = student.StudentId })" class="btn btn-sm btn-primary">Chat</a>
+                    </div>
+                    <hr>
+                }
+            }
+            else
+            {
+                <p class="text-muted">No students assigned yet.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Upcoming Meetings Section -->
+    <div class="col-md-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5>Upcoming Meetings</h5>
+            <a href="@Url.Action("Create", "Teacher")" class="btn btn-secondary">Arrange Meeting</a>
+        </div>
+
+        @if (Model.Meetings.Any())
+        {
+            @foreach (var meeting in Model.Meetings)
+            {
+                <div class="bg-white p-3 rounded shadow-sm mb-3">
+                    <h6>@meeting.Name</h6>
+                    <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
+                    <hr>
+                    <p>@meeting.StudentName</p>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <!-- Update Button (Shows Input) -->
+                        <button class="btn btn-light" onclick="toggleRecordingInput('@meeting.Id')">Update Record Link</button>
+
+                        <!-- View Button (Navigates to Record Link) -->
+                        @if (!string.IsNullOrEmpty(meeting.RecordLink))
+                        {
+                            <a href="@meeting.RecordLink" target="_blank" class="btn btn-secondary">View Record</a>
+                        }
+                        <a href="@meeting.MeetingLink" target="_blank" class="btn btn-secondary">Join Meeting</a>
+                    </div>
+
+                    <!-- Hidden Input for Updating Record Link -->
+                    <div id="recordingInputContainer-@meeting.Id" class="mt-2 d-none">
+                        <input type="url" id="recordingLinkInput-@meeting.Id" class="form-control form-control-sm w-50"
+                               placeholder="Enter recording link" value="@meeting.RecordLink" />
+                        <button class="btn btn-primary btn-sm mt-1" onclick="saveRecordLink('@meeting.Id')">Save</button>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">No upcoming meetings.</p>
+        }
+    </div>
+</div>
+
+<script>
+    function toggleRecordingInput(meetingId) {
+        var container = document.getElementById("recordingInputContainer-" + meetingId);
+        container.classList.toggle("d-none");
+    }
+
+    function saveRecordLink(meetingId) {
+        var inputField = document.getElementById("recordingLinkInput-" + meetingId);
+        var recordingUrl = inputField.value.trim();
+
+        if (!recordingUrl) {
+            alert("Please enter a valid recording link!");
+            return;
+        }
+
+        // Send AJAX request to update the database
+        fetch('/Teacher/UpdateRecordLink', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: meetingId, recordLink: recordingUrl })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Record link updated successfully!");
+                    window.location.reload(); // Reload to update View Record button
+                } else {
+                    alert("Failed to update record link.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }

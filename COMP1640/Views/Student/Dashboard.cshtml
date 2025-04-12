@@ -1,0 +1,80 @@
+﻿@model COMP1640.ViewModels.TutorMessageViewModel
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Column: Tutor Information and Interactions -->
+        <div class="col-md-4">
+            <!-- Student's Tutor -->
+            <div class="card mb-3">
+                <div class="card-body d-flex align-items-center">
+                    <div>
+                        <h6 class="mb-0">@(Model?.TutorName ?? "No assigned tutor")</h6>
+                        <small class="text-muted">@(Model?.LastMessage ?? "No messages yet")</small>
+                    </div>
+                </div>
+                @if (Model?.TutorId != null)
+                {
+                    <a href="@Url.Action("Index", "Chat", new { userId = Model.TutorId })" class="stretched-link"></a>
+                }
+            </div>
+
+            <!-- Interaction List -->
+            <div class="card">
+                <div class="card-header">Interactions</div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        @if (Model?.Interactions?.Any() == true)
+                        {
+                            @foreach (var interaction in Model.Interactions)
+                            {
+                                <li>
+                                    <strong>@interaction.TutorName</strong> @interaction.Type
+                                    <span class="text-muted float-end">@interaction.Timestamp.ToString("hh:mm tt")</span>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="text-muted">No recent interactions</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Upcoming Meetings -->
+        <div class="col-md-8">
+            <h5>Upcoming Meetings</h5>
+
+            @if (Model?.Meetings?.Any() == true)
+            {
+                @foreach (var meeting in Model.Meetings)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0">@meeting.Name</h6>
+                                <small class="text-muted">@meeting.Deadline.ToString("dd MMM yyyy, hh:mm tt")</small>
+                            </div>
+                            <div>
+                                @if (!string.IsNullOrEmpty(meeting.RecordLink))
+                                {
+                                    <a href="@meeting.RecordLink" target="_blank" class="btn btn-secondary btn-sm">Recorded Video</a>
+                                }
+                                <a href="@meeting.MeetingLink" target="_blank" class="btn btn-primary btn-sm">Join</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">No upcoming meetings.</p>
+            }
+        </div>
+    </div>
+</div>

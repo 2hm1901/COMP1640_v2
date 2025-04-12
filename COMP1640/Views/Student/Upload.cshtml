@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Upload Document";
+}
+
+<div class="container mt-4">
+    <h1 class="fs-4 fw-bold">Upload Document</h1>
+
+    <form asp-action="Upload" asp-controller="Student" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Document Name</label>
+            <input type="text" name="DocumentName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Choose File</label>
+            <input type="file" name="file" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <a href="@Url.Action("Document", "Student")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<style>
+    .card {
+        background-color: #ffffff;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+        }
+
+    .form-control {
+        box-shadow: none; /* Remove default shadow */
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Blue focus ring */
+        }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    .btn-outline-primary {
+        border-color: #3498db;
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+</style>
