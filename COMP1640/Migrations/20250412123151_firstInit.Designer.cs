@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace COMP1640.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250321040709_removeMessageCount")]
-    partial class removeMessageCount
+    [Migration("20250412123151_firstInit")]
+    partial class firstInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,16 +102,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "1001",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f1c5771-35db-4e91-b818-d6856ead0d69",
+                            ConcurrencyStamp = "fcbb92a7-2ad6-4307-aab1-4af9d916c67d",
                             Email = "teacher@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nhu Vinh",
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER@GMAIL.COM",
                             NormalizedUserName = "TEACHER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKYKV+l0tZ1quJ7zrJ25DAZvL9APmknwe+Ev7BcEavhfDFy8IjRE2xdXDFINccUlyg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENlh1+De80mFcGtLkdN4YJi/Wf+mNcONUn7GRf8Etuvk0HCtqWZAHMIujnmNQj1+4g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1499ce43-68cb-4862-abdb-4b7968488d97",
+                            SecurityStamp = "ed48752f-25e1-4e4b-8338-cecd3236d1a1",
                             TwoFactorEnabled = false,
                             UserName = "teacher@gmail.com"
                         },
@@ -119,16 +119,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "1002",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64ef74e2-484b-4e03-b919-49eb3077458e",
+                            ConcurrencyStamp = "cf6f1e4b-aa60-4f41-a1cf-721ee37a5ebb",
                             Email = "teacher2@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Thanh Tra",
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER2@GMAIL.COM",
                             NormalizedUserName = "TEACHER2@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEFVuIeTJQmAeotv1UPwePd5I33KBVpW2HabYQqxNeQdwOn7ker0P6M1SieWrFEIPA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG+0zZgd0hiUZ2PDfoBfae+bf9WMl+/ACkGG2KFADlV7tg0hcT0ZNBZer/T4QgmZeA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "78ce4930-8226-4a89-a909-749f375c02e8",
+                            SecurityStamp = "33ee81c2-d5ca-489f-9927-e509665d4ad9",
                             TwoFactorEnabled = false,
                             UserName = "teacher2@gmail.com"
                         },
@@ -136,16 +136,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "1003",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdfc1191-724c-4bd1-ba1d-19dc490c5470",
+                            ConcurrencyStamp = "95466d3f-3c25-4229-aa43-ed2ef2f92620",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nathan Json",
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL+av8drbKYTzpJIwFCvJI5hl4K7rpmQHh04qgSlhQoCVtjQfXN/hOl90WvWvy0Kww==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOmilqfb427vBx1BCyBwGUMcpIi0oZxqxQhXgtMvYHReKbVzX433qBZr4ch2wjmu+g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2ac807a2-5494-469a-a383-ae86fd35c194",
+                            SecurityStamp = "fe974280-4067-439a-a35a-605cbb91dc16",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         },
@@ -153,16 +153,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "1004",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "90e93624-d6fe-4036-9de8-3696ec737630",
+                            ConcurrencyStamp = "f9d58aa9-6813-4204-bf54-055d55239fc3",
                             Email = "staff2@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Ly Tieu Long",
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF2@GMAIL.COM",
                             NormalizedUserName = "STAFF2@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPvErj4Kg9NWjysn8CeTZKPooSGswbdC9dLpfcTyIaQSPKC1uKuc8YxA5Ub+JRj72g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAFrKsSy2H8QmlkkYu/sJGcCX5napdQZSrHKP1z9uKSqAilXOWoENISbogvig5cC8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "74de207c-b891-445e-acf9-54dee0670e54",
+                            SecurityStamp = "8f688116-46cd-4d5c-9c8c-f3e700b3d42b",
                             TwoFactorEnabled = false,
                             UserName = "staff2@gmail.com"
                         },
@@ -170,16 +170,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "2001",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68f96115-5acb-4f65-b141-ab10e1e71e19",
+                            ConcurrencyStamp = "0e28469f-45f5-4452-be38-ab7413a7ae91",
                             Email = "student1@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Bui Quang Minh",
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT1@GMAIL.COM",
                             NormalizedUserName = "STUDENT1@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOlTxsUJV5qhoSgNnn0MRNzQZ3KXcylYFH8G3JdZv67ovYZjZZCle7y425FYRQ5F/w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHy//lxRJpC6yAfngmZB4Beu46AtmhLIKJ5mFOHewX40nkwd/UfBA1v+BsQLPkwKaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a5725d9-be94-47ad-bc92-0e1515be8cbb",
+                            SecurityStamp = "898d7f57-0c6e-453b-a4af-afc567dd6824",
                             TutorId = "1001",
                             TwoFactorEnabled = false,
                             UserName = "student1@gmail.com"
@@ -188,16 +188,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "2002",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "938e2d22-cdf8-48d9-97ec-4945cd7039d1",
+                            ConcurrencyStamp = "c1da6540-a062-4be2-a9c7-031059b91f42",
                             Email = "student2@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nguyen Hoang Anh",
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT2@GMAIL.COM",
                             NormalizedUserName = "STUDENT2@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGUbaTOOCyOD33YogQ0ReW63UmHKDhq2LyRm4emEQZ171IPmvl1ipPWLenlHAjDGzA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAhdWgnYVTYnTvF36bz7aIUtA35uFGYT1k06AcBqu/q1IYDhb+v8uE1e1Fn+8yng+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c7961a6d-254e-470b-8fcb-a069e7d2b212",
+                            SecurityStamp = "85a5671e-91bc-4f81-8bbe-9bc22e83c3eb",
                             TutorId = "1002",
                             TwoFactorEnabled = false,
                             UserName = "student2@gmail.com"
@@ -206,16 +206,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "2003",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a7601f3-adf0-4948-ae0e-39f1d728ce72",
+                            ConcurrencyStamp = "998d7777-c520-46f2-b983-6e06f3cc7f79",
                             Email = "student3@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tran Bao Ngoc",
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT3@GMAIL.COM",
                             NormalizedUserName = "STUDENT3@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDLPXi83FCrFUtulDc2BsEeL4PXUDJIOZCKs/zaVKF+lPf2TLImIoDFsIffvJGvdBQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJVNNtV0LGpW2jCyoWGPH1TTcYCUGigC17xO4VCnI+pt7DbcEF2Kjtipe4FIxHWZvg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52eee58c-3e07-4471-89ee-01b52ed8fa15",
+                            SecurityStamp = "f8399f9e-4980-4c39-b46f-a9bfc642b32f",
                             TwoFactorEnabled = false,
                             UserName = "student3@gmail.com"
                         },
@@ -223,16 +223,16 @@ namespace COMP1640.Migrations
                         {
                             Id = "2004",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac2dc450-3ebe-4202-a93a-7635d4a87508",
+                            ConcurrencyStamp = "b4fa4f53-c3e4-47b1-bf4d-27c0aef114a0",
                             Email = "student4@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Pham Tuan Kiet",
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT4@GMAIL.COM",
                             NormalizedUserName = "STUDENT4@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMxsXT4Cgj6Jr7z0wBPxdbGI+UDra/9XFNtWbqbIZjyIX21j4Q8jXdLElAjf9EELvQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB4pCV/JYvlgnlYHEM/8YZhHB9oADnREJCQrOPwxM9NcnQ0Jf9c1m4bPgNLzj/T7eQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b019e641-4203-4879-96b3-ab8c1ec02f97",
+                            SecurityStamp = "18b6ccab-a158-4ab5-a15f-6c49a6bdfc7b",
                             TutorId = "1001",
                             TwoFactorEnabled = false,
                             UserName = "student4@gmail.com"
@@ -241,19 +241,50 @@ namespace COMP1640.Migrations
                         {
                             Id = "2005",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb66a7fd-cfb5-4d2f-8d12-67d28f9fbaa7",
+                            ConcurrencyStamp = "ba43d613-fa43-4d6e-9aa6-e7a5b7207c76",
                             Email = "student5@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Le Hong Phong",
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT5@GMAIL.COM",
                             NormalizedUserName = "STUDENT5@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG90QHxw/Y+AXwDqDuuDDpcD4neGLQXxSlK+9QZZ2sGdF0FqRLmf8R8+XdUGAj8oWA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOuvxVIa+9xyS96ozoFUfZzh+ZQq7PUcVIlYgXYgNsMwUO0lbAQ+RlueUFfo0kkG9g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e399abd1-41d5-4733-ad38-c272b98bb2c2",
+                            SecurityStamp = "196cc554-abc3-4634-aafb-527b5e778473",
                             TwoFactorEnabled = false,
                             UserName = "student5@gmail.com"
                         });
+                });
+
+            modelBuilder.Entity("COMP1640.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("DocumentId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("DocumentId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("COMP1640.Models.Document", b =>
@@ -264,22 +295,30 @@ namespace COMP1640.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("DateUploaded")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UploadedBy")
+                    b.Property<string>("StudentId")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TutorId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TutorId");
 
                     b.ToTable("Documents");
                 });
@@ -320,7 +359,7 @@ namespace COMP1640.Migrations
                         {
                             Id = 1,
                             StudentId = "1e64a03d-37b5-4c8c-9985-64383c47a696",
-                            Timestamp = new DateTime(2025, 3, 21, 4, 0, 8, 675, DateTimeKind.Utc).AddTicks(4990),
+                            Timestamp = new DateTime(2025, 4, 12, 12, 24, 49, 953, DateTimeKind.Utc).AddTicks(4870),
                             TutorId = "1002",
                             Type = "Uploaded a document"
                         },
@@ -328,7 +367,7 @@ namespace COMP1640.Migrations
                         {
                             Id = 2,
                             StudentId = "1e64a03d-37b5-4c8c-9985-64383c47a696",
-                            Timestamp = new DateTime(2025, 3, 21, 3, 52, 8, 675, DateTimeKind.Utc).AddTicks(4998),
+                            Timestamp = new DateTime(2025, 4, 12, 12, 16, 49, 953, DateTimeKind.Utc).AddTicks(4879),
                             TutorId = "1002",
                             Type = "Sent you a message"
                         },
@@ -336,7 +375,7 @@ namespace COMP1640.Migrations
                         {
                             Id = 3,
                             StudentId = "1e64a03d-37b5-4c8c-9985-64383c47a696",
-                            Timestamp = new DateTime(2025, 3, 21, 3, 37, 8, 675, DateTimeKind.Utc).AddTicks(5000),
+                            Timestamp = new DateTime(2025, 4, 12, 12, 1, 49, 953, DateTimeKind.Utc).AddTicks(4881),
                             TutorId = "1001",
                             Type = "Commented on your document"
                         });
@@ -648,6 +687,42 @@ namespace COMP1640.Migrations
                     b.Navigation("Tutor");
                 });
 
+            modelBuilder.Entity("COMP1640.Models.Comment", b =>
+                {
+                    b.HasOne("COMP1640.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("COMP1640.Models.Document", "Document")
+                        .WithMany("Comments")
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("COMP1640.Models.Document", b =>
+                {
+                    b.HasOne("COMP1640.Models.ApplicationUser", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("COMP1640.Models.ApplicationUser", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorId");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Tutor");
+                });
+
             modelBuilder.Entity("COMP1640.Models.Interaction", b =>
                 {
                     b.HasOne("COMP1640.Models.ApplicationUser", "Student")
@@ -754,6 +829,11 @@ namespace COMP1640.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("COMP1640.Models.Document", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
