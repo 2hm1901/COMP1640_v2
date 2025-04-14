@@ -136,7 +136,7 @@ public class TeacherController : Controller
             await _emailService.SendEmailAsync(student.Email, subject, body);
         }
 
-        return RedirectToAction("Index");
+        return RedirectToAction("Dashboard", "Teacher");
     }
 
     [HttpPost]

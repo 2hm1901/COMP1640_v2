@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-semibold" style="color: #2c3e50;">Total Students</h5>
                     <p class="display-6" style="color: #3498db;">150</p> <!-- Placeholder value -->
-                    <a asp-controller="Staff" asp-action="StudentManagement" class="btn btn-outline-primary">View Students</a>
+                    <a asp-controller="Staff" asp-action="Student" class="btn btn-outline-primary">View Students</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-semibold" style="color: #2c3e50;">Total Teachers</h5>
                     <p class="display-6" style="color: #3498db;">25</p> <!-- Placeholder value -->
-                    <a asp-controller="Staff" asp-action="TeacherManagement" class="btn btn-outline-primary">View Teachers</a>
+                    <a asp-controller="Staff" asp-action="Teacher" class="btn btn-outline-primary">View Teachers</a>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
     <div class="quick-actions mb-5">
         <h4 class="fw-semibold" style="color: #34495e;">Quick Actions</h4>
         <div class="d-flex flex-wrap gap-3 mt-3">
-            <a asp-controller="Staff" asp-action="AssignStudentToTeacher" class="btn btn-primary px-4 py-2">Assign Student to Teacher</a>
-            <a asp-controller="Staff" asp-action="AssignTeacherToStudent" class="btn btn-outline-primary px-4 py-2">Assign Teacher to Student</a>
+            <a asp-controller="Staff" asp-action="Teacher" class="btn btn-primary px-4 py-2">Assign Student to Teacher</a>
+            <a asp-controller="Staff" asp-action="Student" class="btn btn-outline-primary px-4 py-2">Assign Teacher to Student</a>
             <a asp-controller="Staff" asp-action="ManageRecords" class="btn btn-outline-primary px-4 py-2">Manage Records</a>
         </div>
     </div>
